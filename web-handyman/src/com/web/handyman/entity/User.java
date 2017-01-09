@@ -1,16 +1,19 @@
 /* User class stores user name, password and email.
  * 
- *  SQL mappings # id, user_name, user_password, user_email
- * 
+ *  SQL mappings 
+ *  id, user_name, user_password, user_email, handyman_id
  */
 
 package com.web.handyman.entity;
+
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -33,9 +36,36 @@ public class User {
 	@Column(name="user_email")
 	private String email;
 	
+	// add workorder OneToMAny relationship 
+	
+	@OneToMany(mappedBy="user")
+	private Set<WorkOrder> workOrder;
+	
+	
+	
 	public User(){
 		
 	}
+	
+	
+
+
+
+
+
+	public User(String userName, String userPassword, String email, Set<WorkOrder> workOrder) {
+		super();
+		this.userName = userName;
+		this.userPassword = userPassword;
+		this.email = email;
+		this.workOrder = workOrder;
+	}
+
+
+
+
+
+
 
 	public int getId() {
 		return id;
@@ -67,6 +97,16 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	
+	
+	public Set<WorkOrder> getWorkOrder() {
+		return workOrder;
+	}
+
+	public void setWorkOrder(Set<WorkOrder> workOrder) {
+		this.workOrder = workOrder;
 	}
 
 	@Override
