@@ -44,4 +44,12 @@ public class HandymanServiceImpl implements HandymanService {
 			return userDAO.getUser(theId);
 		}
 
+		@Override
+		@Transactional
+		public void deleteUser(int theId) {
+			
+			userDAO.deleteUser(theId);
+			
+		}
+
 }
