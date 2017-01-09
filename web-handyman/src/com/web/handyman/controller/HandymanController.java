@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.handyman.entity.User;
 import com.web.handyman.service.HandymanService;
@@ -34,7 +37,7 @@ public class HandymanController {
 			
 			List<User> listOfUsers =  handymanService.getUsers();
 			
-			// add customers to DAO model
+			// add users to DAO model
 			theModel.addAttribute("users", listOfUsers);
 			
 			
@@ -56,5 +59,46 @@ public class HandymanController {
 			return "user-form";
 			
 		}
+		
+		// Saving User
+		
+		@PostMapping("/saveUser")
+		public String saveUser(@ModelAttribute("user") User theUser){
+			
+			// Save the user using service
+			handymanService.saveUser(theUser);
+			
+			
+			return "redirect:/handyman/list";
+			
+		}
+		
+		// Updating User information
+		@GetMapping("/showFormForUpdate")
+		public String showFormForUpdate(@RequestParam("userId") int theId, Model theModel){
+			
+			// get the user from the service
+			User theUser= handymanService.getUser(theId);
+			
+			// set user as a model attribute to pre populate the form 
+			theModel.addAttribute("user", theUser);
+			
+			
+			
+			// send over to our form
+			return "user-form";
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	
 }

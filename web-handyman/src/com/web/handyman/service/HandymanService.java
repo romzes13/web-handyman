@@ -9,6 +9,10 @@ public interface HandymanService {
 
 	public List<User> getUsers();
 
+	public void saveUser(User theUser);
+
+	public User getUser(int theId);
+
 	
 	
 }

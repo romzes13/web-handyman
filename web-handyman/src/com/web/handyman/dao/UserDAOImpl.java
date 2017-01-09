@@ -41,7 +41,9 @@ public class UserDAOImpl implements UserDAO {
 			//List<User> users = theQuery.getResultList();
 						
 			// Test creating and adding user
-						User user = new User();
+						
+						
+						/*User user = new User();
 						user.setUserName("Anton");
 						
 						WorkOrder workOrder = new WorkOrder("First work order", "Fix lights", 200, "Warrensburgh", user);
@@ -51,7 +53,7 @@ public class UserDAOImpl implements UserDAO {
 						
 						currentSession.save(user);
 						currentSession.save(workOrder);
-						
+						*/
 						
 						
 			
@@ -65,6 +67,32 @@ public class UserDAOImpl implements UserDAO {
 		public List<Handyman> getHandymen() {
 			// TODO Auto-generated method stub
 			return null;
+		}
+
+		@Override
+		public void saveUser(User user) {
+			
+			Session currentSession = sessionFactory.getCurrentSession();
+			
+			// save/update the user
+			currentSession.saveOrUpdate(user);
+			
+			
+		}
+
+		@Override
+		public User getUser(int theId) {
+			
+			// get the current hibernate session
+			
+			Session currentSession = sessionFactory.getCurrentSession();
+			
+			
+			// Retrieve/read from database using primary key
+			
+			User user = currentSession.get(User.class, theId);
+			
+			return user;
 		}
 
 }

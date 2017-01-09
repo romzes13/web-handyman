@@ -36,6 +36,13 @@
 				class="add-button"
 		/>
 		
+		<!-- Add new Button to add new work order -->
+		
+		<input type="button" value="Add Workorder"
+				onclick="window.location.href='showFormForAdd'; return false;"
+				class="add-button"
+		/>
+		
 		
 		<!-- Add our html table -->
 		
@@ -52,25 +59,25 @@
 			<c:forEach var="tempUser" items="${users}">
 					<!-- Construct an update link with customer id -->
 					
-				<%-- 	<c:url var="updateLink" value="/customer/showFormForUpdate">
-						<c:param name="customerId" value="${tempCustomer.id}"/>
+				 	<c:url var="updateLink" value="/handyman/showFormForUpdate">
+						<c:param name="userId" value="${tempUser.id}"/>
 					</c:url>
 					
 					<!-- Construct delete link with customer id -->
-					<c:url var="deleteLink" value="/customer/delete">
-						<c:param name="customerId" value="${tempUser.id}"/>
-					</c:url> --%>
+					<c:url var="deleteLink" value="/handyman/delete">
+						<c:param name="userId" value="${tempUser.id}"/>
+					</c:url> 
 					
 					<tr>
 						<td>${tempUser.userName}</td>
 						<td>${tempUser.userPassword}</td>
 						<td>${tempUser.email}</td>
-						<%-- 
+						
 						<td><a href="${updateLink}">Update</a>
 					    | <a href="${deleteLink}"
 					    onclick="if (!(confirm('Are you sure you want to delete this user ?'))) return false"
 					    
-					    >Delete</a></td> --%>
+					    >Delete</a></td> 
 					</tr>
 			
 			

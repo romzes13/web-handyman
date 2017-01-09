@@ -26,5 +26,22 @@ public class HandymanServiceImpl implements HandymanService {
 	
 			return userDAO.getUsers();
 		}
+		
+		// Saving user 
+		@Override
+		@Transactional
+		public void saveUser(User user){
+			
+			userDAO.saveUser(user);
+			
+			
+		}
+
+		@Override
+		@Transactional
+		public User getUser(int theId) {
+			
+			return userDAO.getUser(theId);
+		}
 
 }
