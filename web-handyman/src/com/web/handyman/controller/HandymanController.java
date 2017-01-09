@@ -90,7 +90,15 @@ public class HandymanController {
 			
 		}
 		
-		
+		@GetMapping("/delete")
+		public String delete(@RequestParam("userId") int theId) {
+			
+			// delete the user with id
+			
+			handymanService.deleteUser(theId);
+			
+			return "redirect:/handyman/list";
+		}
 		
 		
 		

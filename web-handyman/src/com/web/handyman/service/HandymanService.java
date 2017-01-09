@@ -13,6 +13,8 @@ public interface HandymanService {
 
 	public User getUser(int theId);
 
+	public void deleteUser(int theId);
+
 	
 	
 }

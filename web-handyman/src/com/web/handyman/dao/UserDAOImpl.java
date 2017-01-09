@@ -95,4 +95,31 @@ public class UserDAOImpl implements UserDAO {
 			return user;
 		}
 
+		@Override
+		public void deleteUser(int theId) {
+			
+			// get the current hibernate session
+			
+			Session currentSession = sessionFactory.getCurrentSession();
+			
+			// delete object with primary key
+			
+			User user = currentSession.get(User.class, theId);
+			//user.getWorkOrder().remove(user);
+			
+			currentSession.delete(user);
+			
+			//Query theQuery = currentSession.createQuery("delete from User where id=:userId");
+			//theQuery.setParameter("userId", theId);
+			
+			//theQuery.executeUpdate();
+			
+			
+		}
+
+		
+		
+		
+		
+		
 }
