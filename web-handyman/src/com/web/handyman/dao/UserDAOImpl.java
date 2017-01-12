@@ -1,6 +1,7 @@
 package com.web.handyman.dao;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -43,7 +44,7 @@ public class UserDAOImpl implements UserDAO {
 			// Test creating and adding user
 						
 						
-						/*User user = new User();
+				/*		User user = new User();
 						user.setUserName("Anton");
 						
 						WorkOrder workOrder = new WorkOrder("First work order", "Fix lights", 200, "Warrensburgh", user);
@@ -51,12 +52,13 @@ public class UserDAOImpl implements UserDAO {
 						Set<WorkOrder> workOrdersSet = new HashSet<WorkOrder>();
 						workOrdersSet.add(workOrder);
 						
+						//workOrder.getUser().setEmail("30");
+						user.setEmail(user.getId()+"");
 						currentSession.save(user);
-						currentSession.save(workOrder);
-						*/
+						currentSession.save(workOrder);*/
 						
+					
 						
-			
 			System.out.println("Printing from UserDAOImpl: " + users);
 			// return the results
 			
@@ -107,7 +109,43 @@ public class UserDAOImpl implements UserDAO {
 			User user = currentSession.get(User.class, theId);
 			//user.getWorkOrder().remove(user);
 			
-			currentSession.delete(user);
+			Set workorders = user.getWorkOrder();
+			
+			
+			System.out.println("\n\nWorkorder: " + workorders +"\n\n");
+			
+			
+			Iterator<WorkOrder> work = workorders.iterator();
+			while (work.hasNext()){
+				
+				WorkOrder workorder = work.next();
+				workorder.setUser(null); 
+				
+				System.out.println("Printing User      ID: " + user.getId());
+				System.out.println("Printing workorder ID: " + workorder.getId());
+				System.out.println("Printing workorder   : " + workorder);
+				
+				currentSession.update(workorder);
+				
+				//Query theQuery = currentSession.createQuery("update WorkOrder w set w.user = null where id=:userId");
+				//update Employee e set e.boss = null where e.boss = ?
+				//WorkOrder w = (WorkOrder) user.getWorkOrder().iterator().next();
+				//user.getWorkOrder().remove(user);
+				
+				/*Parent p = (Parent) session.load(Parent.class, pid);
+				Child c = (Child) p.getChildren().iterator().next();
+				p.getChildren().remove(c);*/
+				
+				
+				
+				
+			}
+			
+			//user.getWorkOrder().remove(user);
+			
+			// Uncomment this ==>			
+			
+			currentSession.remove(user);
 			
 			//Query theQuery = currentSession.createQuery("delete from User where id=:userId");
 			//theQuery.setParameter("userId", theId);
