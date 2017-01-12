@@ -39,9 +39,19 @@
 		<!-- Add new Button to add new work order -->
 		
 		<input type="button" value="Add Workorder"
-				onclick="window.location.href='showFormForAdd'; return false;"
+				onclick="window.location.href='listWorkOrder'; return false;"
 				class="add-button"
 		/>
+		
+		<!-- Add new Button to add new work order -->
+		
+		<input type="button" value="Add Workorder"
+				onclick="window.location='listWorkOrder'; return false;"
+				class="add-button"
+		/>
+		
+		<a href="/web-handyman">Home</a>
+		<a href="/web-handyman/workorder/list">WorkOrders</a>
 		
 		
 		<!-- Add our html table -->
