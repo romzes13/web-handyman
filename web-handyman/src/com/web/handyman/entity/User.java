@@ -8,11 +8,14 @@ package com.web.handyman.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -38,7 +41,7 @@ public class User {
 	
 	// add workorder OneToMAny relationship 
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="user", orphanRemoval=true, cascade=CascadeType.ALL)
 	private Set<WorkOrder> workOrder;
 	
 	
@@ -48,10 +51,6 @@ public class User {
 	}
 	
 	
-
-
-
-
 
 	public User(String userName, String userPassword, String email, Set<WorkOrder> workOrder) {
 		super();
