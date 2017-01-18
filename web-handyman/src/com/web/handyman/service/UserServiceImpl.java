@@ -11,7 +11,7 @@ import com.web.handyman.entity.Handyman;
 import com.web.handyman.entity.User;
 
 @Service
-public class HandymanServiceImpl implements HandymanService {
+public class UserServiceImpl implements UserService {
 
 		// need to inject user DAO
 		@Autowired
