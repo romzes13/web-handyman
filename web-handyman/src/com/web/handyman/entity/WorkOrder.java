@@ -1,13 +1,16 @@
 /* This class defines WorkOrder model
- * SQL: id, work_order_name, work_description, estimate, location, user_id
  * 
+ * 
+ * Updated SQL collumns: id, work_order_name, work_description, estimate, location, 
+ * user_id, date_received, date_scheduled, date_compleated, compleated
  * 
  */
 
 
 package com.web.handyman.entity;
 
-import javax.persistence.CascadeType;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,6 +20,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="work_order")
@@ -39,7 +46,29 @@ public class WorkOrder {
 	@Column(name="location")
 	private String location;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@Column(name="date_received")
+	//@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	private Date dateReceived;
+	
+	@Column(name="date_scheduled")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	private Date dateScheduled;
+	
+	@Column(name="date_compleated")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	private Date dateCompleated;
+	
+	@Column(name="compleated")
+	private Boolean isCompleated=false;
+	
+	
+	
+	// fetch = FetchType.EAGER replaced with LAZY
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="user_id", nullable = true)
 	private User user;
 	
@@ -124,13 +153,78 @@ public class WorkOrder {
 		this.user = user;
 	}
 
+	
+	
+
+	public Date getDateReceived() {
+		return dateReceived;
+	}
+
+
+
+
+	public void setDateReceived(Date dateReceived) {
+		this.dateReceived = dateReceived;
+	}
+
+
+
+
+	public Date getDateScheduled() {
+		return dateScheduled;
+	}
+
+
+
+
+	public void setDateScheduled(Date dateScheduled) {
+		this.dateScheduled = dateScheduled;
+	}
+
+
+
+
+	public Date getDateCompleated() {
+		return dateCompleated;
+	}
+
+
+
+
+	public void setDateCompleated(Date dateCompleated) {
+		this.dateCompleated = dateCompleated;
+	}
+
+	
+
+
+
+
+	public Boolean getIsCompleated() {
+		return isCompleated;
+	}
+
+
+
+
+	public void setIsCompleated(Boolean isCompleated) {
+		this.isCompleated = isCompleated;
+	}
+
+
+
 
 	@Override
 	public String toString() {
 		return "WorkOrder [id=" + id + ", workOrderName=" + workOrderName + ", workDescription=" + workDescription
-				+ ", estimate=" + estimate + ", location=" + location + ", user=" + user + "]" + "\n";
+				+ ", estimate=" + estimate + ", location=" + location + ", dateReceived=" + dateReceived
+				+ ", dateScheduled=" + dateScheduled + ", dateCompleated=" + dateCompleated + ", isCompleated="
+				+ isCompleated + ", user=" + user + "] \n";
 	}
-	
+
+
+
+
 	
 	
 

@@ -8,6 +8,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.web.handyman.entity.User;
 import com.web.handyman.entity.WorkOrder;
 
 @Repository
@@ -38,9 +39,21 @@ public class WorkorderDAOImpl implements WorkorderDAO {
 
 	@Override
 	public void saveWorkOrder(WorkOrder theWorkOrder) {
-		
+		System.out.println(" \n Printing from WorkOrder : \n");
 		// get the current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
+		
+		User user = theWorkOrder.getUser();
+		System.out.println("workorder: " + theWorkOrder);
+		System.out.println("user: " + user);
+		if (user.getId() == null) {
+			
+			System.out.println(" NULL: " + user.getId());
+			
+			theWorkOrder.setUser(null);
+		}
+		
+		System.out.println("\n Boolean is set to : " + theWorkOrder.getIsCompleated() +"\n");
 		
 		//save/update the work order
 		currentSession.saveOrUpdate(theWorkOrder);
@@ -55,7 +68,11 @@ public class WorkorderDAOImpl implements WorkorderDAO {
 		Session currentSession = sessionFactory.getCurrentSession();
 		
 		// Retrive/read from database using primary key
-		WorkOrder workorder = currentSession.get(WorkOrder.class, theId);
+		
+		 WorkOrder workorder = currentSession.get(WorkOrder.class, theId);
+		
+		// Lazy fetching 
+		//WorkOrder workorder = currentSession.load(WorkOrder.class, theId);
 		
 		
 		return workorder;
@@ -78,5 +95,7 @@ public class WorkorderDAOImpl implements WorkorderDAO {
 		theQuery.executeUpdate();
 		
 	}
+
+	
 
 }

@@ -28,7 +28,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
-	private int id;
+	private Integer id;
 	
 	@Column(name="user_name")
 	private String userName;
@@ -40,8 +40,8 @@ public class User {
 	private String email;
 	
 	// add workorder OneToMAny relationship 
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="user", orphanRemoval=true, cascade=CascadeType.ALL)
+	//orphanRemoval=true, cascade=CascadeType.ALL
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="user" )
 	private Set<WorkOrder> workOrder;
 	
 	
@@ -66,11 +66,11 @@ public class User {
 
 
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -111,7 +111,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", userName=" + userName + ", userPassword=" + userPassword + ", email=" + email
-				+ "]";
+				+ "]\n";
 	}
 	
 	

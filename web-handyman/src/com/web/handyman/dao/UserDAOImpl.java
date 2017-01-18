@@ -29,35 +29,14 @@ public class UserDAOImpl implements UserDAO {
 			Session currentSession = sessionFactory.getCurrentSession();
 			
 			//create a query
-			// query students
+			// query users
+			
 			System.out.println("Printing from UserDAOImpl: \n");
-						List<User> users = currentSession.createQuery("from User").getResultList();
-						
-						//displayStudents(theStudents);
-						
 			
-			//Query<User> theQuery = currentSession.createQuery("from User", User.class);
+			//List<User> users1 = (List<User>) currentSession.load(User.class, );
 			
-			// execute query and get a result list
-			//List<User> users = theQuery.getResultList();
-						
-			// Test creating and adding user
-						
-						
-				/*		User user = new User();
-						user.setUserName("Anton");
-						
-						WorkOrder workOrder = new WorkOrder("First work order", "Fix lights", 200, "Warrensburgh", user);
-						
-						Set<WorkOrder> workOrdersSet = new HashSet<WorkOrder>();
-						workOrdersSet.add(workOrder);
-						
-						//workOrder.getUser().setEmail("30");
-						user.setEmail(user.getId()+"");
-						currentSession.save(user);
-						currentSession.save(workOrder);*/
-						
-					
+			List<User> users = currentSession.createQuery("from User").getResultList();
+								
 						
 			System.out.println("Printing from UserDAOImpl: " + users);
 			// return the results

@@ -5,13 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.web.handyman.entity.User;
 import com.web.handyman.entity.WorkOrder;
+import com.web.handyman.service.HandymanService;
 import com.web.handyman.service.WorkorderService;
 
 @Controller
@@ -21,7 +24,8 @@ public class WorkorderController {
 			// need to inject the customer service
 			@Autowired
 			private WorkorderService workorderService;
-	
+			@Autowired
+			private HandymanService handymanService;  
 
 			@GetMapping("/list")
 			public String listWorkOrder(Model theModel){
@@ -65,7 +69,14 @@ public class WorkorderController {
 			// Saving workorder
 			
 			@PostMapping("/saveWorkOrder")
-			public String saveWorkOrder(@ModelAttribute("workorder") WorkOrder theWorkOrder){
+			public String saveWorkOrder(@ModelAttribute("workorder") WorkOrder theWorkOrder, BindingResult result){
+				
+				if (result.hasErrors()){
+					
+					return "workorder-form";
+					
+				}
+				
 				
 				workorderService.saveWorkOrder(theWorkOrder);
 				
@@ -76,14 +87,21 @@ public class WorkorderController {
 			// Update Workorder information
 			
 			@GetMapping("/showFormForUpdate")
-			public String showFormForUpdate(@RequestParam("workorderId") int theId, Model theModel){
+			public String showFormForUpdate(@RequestParam("workorderId") int theId, Model theModel ){
+				
+				
+				
 				
 				// Get the workorder from the service
 				
 				WorkOrder workOrder = workorderService.getWorkOrder(theId);
 				
+				// get list of users to select and assign to a work order
+				List<User> listOfUsers =  handymanService.getUsers();
+				System.out.println("\nPrinting Users from Workorder Controller: \n" + listOfUsers);
 				// set workorder as a model to prepopulate the form
 				theModel.addAttribute("workorder", workOrder);
+				theModel.addAttribute("users", listOfUsers);
 				
 				// send over to our form
 				
