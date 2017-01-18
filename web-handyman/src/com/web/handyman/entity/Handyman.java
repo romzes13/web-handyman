@@ -1,7 +1,7 @@
 /* 
  * Handyman class model.
  * SQL table "handyman"
- * # id, first_name, last_name
+ * # id, first_name, last_name, phone_number, rate, insurance, active, user_id
  * 
  */
 
@@ -10,9 +10,13 @@ package com.web.handyman.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,7 +26,7 @@ public class Handyman {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
-	private int id;
+	private Integer id;
 	
 	@Column(name="first_name")
 	private String firstName;
@@ -30,15 +34,32 @@ public class Handyman {
 	@Column(name="last_name")
 	private String lastName;
 
+	@Column(name="phone_number")
+	private String phoneNumber;
+	
+	@Column(name="rate")
+	private double rate;
+	
+	@Column(name="insurance")
+	private String insurance;
+	
+	@Column(name="active")
+	private Boolean active;
+	
+	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="user_id", nullable = true)
+	private User user;
+	
 	public Handyman(){
 		
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -58,11 +79,53 @@ public class Handyman {
 		this.lastName = lastName;
 	}
 
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public double getRate() {
+		return rate;
+	}
+
+	public void setRate(double rate) {
+		this.rate = rate;
+	}
+
+	public String getInsurance() {
+		return insurance;
+	}
+
+	public void setInsurance(String insurance) {
+		this.insurance = insurance;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
-		return "Handyman [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+		return "Handyman [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
+				+ phoneNumber + ", rate=" + rate + ", insurance=" + insurance + ", active=" + active + ", user=" + user
+				+ "]\n";
 	}
-	
+
 	
 	
 	
