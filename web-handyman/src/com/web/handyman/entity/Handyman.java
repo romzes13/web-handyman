@@ -19,6 +19,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name="handyman")
 public class Handyman {
@@ -38,7 +41,7 @@ public class Handyman {
 	private String phoneNumber;
 	
 	@Column(name="rate")
-	private double rate;
+	private Double rate;
 	
 	@Column(name="insurance")
 	private String insurance;
@@ -48,6 +51,7 @@ public class Handyman {
 	
 	
 	@OneToOne(fetch = FetchType.EAGER)
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name="user_id", nullable = true)
 	private User user;
 	
@@ -87,12 +91,17 @@ public class Handyman {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public double getRate() {
+	public Double getRate() {
 		return rate;
 	}
 
-	public void setRate(double rate) {
-		this.rate = rate;
+	public void setRate(Double rate) {
+		// check for nullable values
+		
+		if (rate != null)
+			this.rate = rate;
+		else this.rate = (double) 1;
+		
 	}
 
 	public String getInsurance() {

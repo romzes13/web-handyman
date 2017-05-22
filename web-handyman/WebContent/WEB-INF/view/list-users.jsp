@@ -36,22 +36,10 @@
 				class="add-button"
 		/>
 		
-		<!-- Add new Button to add new work order -->
-		
-		<input type="button" value="Add Workorder"
-				onclick="window.location.href='listWorkOrder'; return false;"
-				class="add-button"
-		/>
-		
-		<!-- Add new Button to add new work order -->
-		
-		<input type="button" value="Add Workorder"
-				onclick="window.location='listWorkOrder'; return false;"
-				class="add-button"
-		/>
 		
 		<a href="/web-handyman">Home</a>
 		<a href="/web-handyman/workorder/list">WorkOrders</a>
+		<a href="/web-handyman/handyman/list">Handyman</a>
 		
 		
 		<!-- Add our html table -->
@@ -69,12 +57,12 @@
 			<c:forEach var="tempUser" items="${users}">
 					<!-- Construct an update link with customer id -->
 					
-				 	<c:url var="updateLink" value="/handyman/showFormForUpdate">
+				 	<c:url var="updateLink" value="/user/showFormForUpdate">
 						<c:param name="userId" value="${tempUser.id}"/>
 					</c:url>
 					
 					<!-- Construct delete link with customer id -->
-					<c:url var="deleteLink" value="/handyman/delete">
+					<c:url var="deleteLink" value="/user/delete">
 						<c:param name="userId" value="${tempUser.id}"/>
 					</c:url> 
 					
