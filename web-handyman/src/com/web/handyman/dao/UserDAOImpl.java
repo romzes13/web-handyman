@@ -86,12 +86,32 @@ public class UserDAOImpl implements UserDAO {
 			// delete object with primary key
 			
 			User user = currentSession.get(User.class, theId);
+			System.out.println("User1: " +user);
 			//user.getWorkOrder().remove(user);
 			
-			Set workorders = user.getWorkOrder();
+			Handyman handyman = user.getHandyman();
 			
+			if(handyman == null){
+				currentSession.remove(user);
+			}else
+			{
+				
+			System.out.println("Handyman: " +handyman);
+			handyman.setUser(null);
+			//currentSession.remove(user);
+			}
 			
-			System.out.println("\n\nWorkorder: " + workorders +"\n\n");
+			Set<WorkOrder> workorders = user.getWorkOrder();
+			
+			if(workorders.isEmpty()){
+				System.out.println("No work orders!");
+				System.out.println("Removing User:" + user);
+				currentSession.remove(user);
+			}
+			
+			else{
+			
+			System.out.println("\n\nWorkorder1: " + workorders +"\n\n");
 			
 			
 			Iterator<WorkOrder> work = workorders.iterator();
@@ -131,7 +151,7 @@ public class UserDAOImpl implements UserDAO {
 			
 			//theQuery.executeUpdate();
 			
-			
+			}
 		}
 
 		
