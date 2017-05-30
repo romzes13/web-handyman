@@ -49,4 +49,12 @@ public class WorkorderServiceImpl implements WorkorderService {
 		
 	}
 
+	@Override
+	@Transactional
+	public List<WorkOrder> getMyWorkOrders() {
+		
+		
+		return workorderDAO.getMyWorkorders();
+	}
+
 }

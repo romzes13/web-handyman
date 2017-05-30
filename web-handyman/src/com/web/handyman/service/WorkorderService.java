@@ -14,4 +14,6 @@ public interface WorkorderService {
 
 	public void deleteWorkorder(int theId);
 
+	public List<WorkOrder> getMyWorkOrders();
+
 }

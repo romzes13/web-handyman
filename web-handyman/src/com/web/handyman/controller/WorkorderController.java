@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.handyman.entity.User;
 import com.web.handyman.entity.WorkOrder;
-import com.web.handyman.service.HandymanService;
+import com.web.handyman.service.UserService;
 import com.web.handyman.service.WorkorderService;
 
 @Controller
@@ -25,7 +25,7 @@ public class WorkorderController {
 			@Autowired
 			private WorkorderService workorderService;
 			@Autowired
-			private HandymanService handymanService;  
+			private UserService handymanService;  
 
 			@GetMapping("/list")
 			public String listWorkOrder(Model theModel){
@@ -88,10 +88,7 @@ public class WorkorderController {
 			
 			@GetMapping("/showFormForUpdate")
 			public String showFormForUpdate(@RequestParam("workorderId") int theId, Model theModel ){
-				
-				
-				
-				
+						
 				// Get the workorder from the service
 				
 				WorkOrder workOrder = workorderService.getWorkOrder(theId);
@@ -119,7 +116,19 @@ public class WorkorderController {
 				return "redirect:/workorder/list";
 			}
 			
-			
+			@GetMapping("/mylist")
+			public String myWorkorders(Model theModel){
+				
+				// get list of work orders from service
+				
+				List<WorkOrder> listOfMyWorkOrders =  workorderService.getMyWorkOrders();
+				
+				// add workOrders to DAO model
+				
+				theModel.addAttribute("workorders", listOfMyWorkOrders);
+				
+				return "mylist-workorders";
+			}
 			
 			
 			

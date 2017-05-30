@@ -14,5 +14,7 @@ public interface WorkorderDAO {
 
 	void deleteWorkorder(int theId);
 
+	List<WorkOrder> getMyWorkorders();
+
 
 }

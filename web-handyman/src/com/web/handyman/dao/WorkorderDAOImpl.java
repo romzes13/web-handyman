@@ -6,6 +6,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import com.web.handyman.entity.User;
@@ -94,6 +98,49 @@ public class WorkorderDAOImpl implements WorkorderDAO {
 		
 		theQuery.executeUpdate();
 		
+	}
+
+	@Override
+	public List<WorkOrder> getMyWorkorders() {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		  if (!(auth instanceof AnonymousAuthenticationToken)) {
+			UserDetails userDetail = (UserDetails) auth.getPrincipal();
+			//model.addObject("username", userDetail.getUsername());
+			System.out.println("Logged in user is: " + userDetail.getUsername());
+			
+			
+			String tempName = userDetail.getUsername();
+			//create a query
+			/*List<WorkOrder> workorders = currentSession.createQuery("from WorkOrder").getResultList();	*/
+			
+			List<WorkOrder> workorders =  (List<WorkOrder>) currentSession.createQuery("from WorkOrder"
+ + " w left join w.user as u where user_name=:tempName").setParameter("tempName", tempName).getResultList();
+								
+			System.out.println("My workorders: \n" + workorders);
+			
+			/*for (WorkOrder temp : workorders) {
+				System.out.println(temp);
+			}*/
+			
+			for(int i=0; i<workorders.size(); i++){
+				//Object[] row =  workorders.get(0);
+				//Company company = (Company)row[0];
+				//Employee employee = (Employee)row[1];
+				
+				//WorkOrder workorder = (WorkOrder)row[0];
+				
+				
+				System.out.println(workorders.get(i));
+			}
+			
+			return workorders;
+		  }
+		  
+		  
+		return null;
 	}
 
 	
