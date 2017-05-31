@@ -116,24 +116,19 @@ public class WorkorderDAOImpl implements WorkorderDAO {
 			//create a query
 			/*List<WorkOrder> workorders = currentSession.createQuery("from WorkOrder").getResultList();	*/
 			
-			List<WorkOrder> workorders =  (List<WorkOrder>) currentSession.createQuery("from WorkOrder"
- + " w left join w.user as u where user_name=:tempName").setParameter("tempName", tempName).getResultList();
+			List<WorkOrder> workorders =  (List<WorkOrder>) currentSession.createQuery("Select w from WorkOrder"
+ + " w inner join w.user as u where user_name=:tempName").setParameter("tempName", tempName).getResultList();
 								
 			System.out.println("My workorders: \n" + workorders);
 			
-			/*for (WorkOrder temp : workorders) {
+			for (WorkOrder temp : workorders) {
 				System.out.println(temp);
-			}*/
+			}
 			
 			for(int i=0; i<workorders.size(); i++){
-				//Object[] row =  workorders.get(0);
-				//Company company = (Company)row[0];
-				//Employee employee = (Employee)row[1];
-				
-				//WorkOrder workorder = (WorkOrder)row[0];
 				
 				
-				System.out.println(workorders.get(i));
+				System.out.println(workorders.get(i).toString());
 			}
 			
 			return workorders;
