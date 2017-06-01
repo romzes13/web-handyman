@@ -73,7 +73,7 @@
 	<div style="clear; both;"></div>
 	
 		<p>
-			<a href="${pageContext.request.contextPath}/handyman/list">Back to list</a>
+			<a href="${pageContext.request.contextPath}/user/list">Back to list</a>
 		</p>
 	
 	

@@ -52,4 +52,11 @@ public class UserServiceImpl implements UserService {
 			
 		}
 
+		@Override
+		@Transactional
+		public User getUser() {
+			
+			return userDAO.getUser();
+		}
+
 }

@@ -17,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -44,6 +45,8 @@ public class User {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="user" )
 	private Set<WorkOrder> workOrder;
 	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy="user" )
+	private Handyman handyman;
 	
 	
 	public User(){
@@ -108,11 +111,33 @@ public class User {
 		this.workOrder = workOrder;
 	}
 
+	
+	
+	public Handyman getHandyman() {
+		return handyman;
+	}
+
+
+
+	public void setHandyman(Handyman handyman) {
+		this.handyman = handyman;
+	}
+
+
+	// Add to string method
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", userName=" + userName + ", userPassword=" + userPassword + ", email=" + email
 				+ "]\n";
 	}
+
+
+
+	
+	
+
+	
+	
 	
 	
 	

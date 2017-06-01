@@ -9,6 +9,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import com.web.handyman.entity.Handyman;
@@ -152,6 +156,39 @@ public class UserDAOImpl implements UserDAO {
 			//theQuery.executeUpdate();
 			
 			}
+		}
+
+		/**
+		 * getUser() returns authenticated user object.
+		 * 
+		 */
+		@Override
+		public User getUser() {
+			
+			Session currentSession = sessionFactory.getCurrentSession();
+			
+			// Check if user authenticated and get name if success
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			  if (!(auth instanceof AnonymousAuthenticationToken)) {
+				UserDetails userDetail = (UserDetails) auth.getPrincipal();
+				//model.addObject("username", userDetail.getUsername());
+				System.out.println("Logged in user is: " + userDetail.getUsername());
+				
+				String userName = userDetail.getUsername();
+				
+				// look up user name in a database and return user object
+				
+				User user = (User) currentSession.createQuery(""
+						+ "Select u from User u where user_name=:userName")
+						.setParameter("userName", userName).getSingleResult();
+				
+				//printing user info
+				System.out.println("User: " + user);
+				
+			return user;
+			
+			  }
+			return null;
 		}
 
 		
