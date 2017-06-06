@@ -57,4 +57,11 @@ public class WorkorderServiceImpl implements WorkorderService {
 		return workorderDAO.getMyWorkorders();
 	}
 
+	@Override
+	@Transactional
+	public List<WorkOrder> getMyWorkOrdersPending() {
+		// TODO Auto-generated method stub
+		return workorderDAO.getMyWorkordersPending();
+	}
+
 }
