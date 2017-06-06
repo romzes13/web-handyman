@@ -55,6 +55,11 @@ public class Handyman {
 	@JoinColumn(name="user_id", nullable = true)
 	private User user;
 	
+	@OneToOne(fetch = FetchType.EAGER)
+	@Cascade({CascadeType.SAVE_UPDATE})
+	@JoinColumn(name="address_id", nullable = true)
+	private Address address;
+	
 	public Handyman(){
 		
 	}
