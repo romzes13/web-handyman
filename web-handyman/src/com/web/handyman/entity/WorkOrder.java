@@ -1,10 +1,12 @@
-/* This class defines WorkOrder model
+/** This class defines WorkOrder model
  * 
  * 
- * Updated SQL collumns: id, work_order_name, work_description, estimate, location, 
- * user_id, date_received, date_scheduled, date_compleated, compleated
  * 
- */
+ * SQL: id, work_order_name, work_description, estimate, location, user_id, date_received, 
+ * date_scheduled, date_compleated, compleated, customers_id, locations_id
+ * 
+ * 
+ **/
 
 
 package com.web.handyman.entity;
@@ -71,6 +73,15 @@ public class WorkOrder {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="user_id", nullable = true)
 	private User user;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="customers_id", nullable = true)
+	private Customer customer;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="locations_id", nullable = true)
+	private Location customerLocation;
+	
 	
 	
 	// Default constructor
@@ -209,6 +220,35 @@ public class WorkOrder {
 
 	public void setIsCompleated(Boolean isCompleated) {
 		this.isCompleated = isCompleated;
+	}
+
+
+
+	
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+
+
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+
+
+
+	public Location getCustomerLocation() {
+		return customerLocation;
+	}
+
+
+
+
+	public void setCustomerLocation(Location customerLocation) {
+		this.customerLocation = customerLocation;
 	}
 
 
