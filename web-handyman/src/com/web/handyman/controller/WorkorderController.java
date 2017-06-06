@@ -127,7 +127,7 @@ public class WorkorderController {
 				
 				theModel.addAttribute("workorders", listOfMyWorkOrders);
 				
-				return "mylist-workorders";
+				return "mylist-workorders-test";
 			}
 			
 			

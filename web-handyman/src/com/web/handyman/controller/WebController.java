@@ -73,6 +73,7 @@ public class WebController {
   	  if (!(auth instanceof AnonymousAuthenticationToken)) {
   		UserDetails userDetail = (UserDetails) auth.getPrincipal();
   		model.addObject("userName", userDetail.getUsername());
+  		System.out.println("User name: " + userDetail.getUsername());
   	  }
 
   	  model.setViewName("403");
@@ -80,7 +81,7 @@ public class WebController {
 
   	}
     
-    @RequestMapping(value = "/admin**", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public ModelAndView adminPage() {
 
 	  ModelAndView model = new ModelAndView();

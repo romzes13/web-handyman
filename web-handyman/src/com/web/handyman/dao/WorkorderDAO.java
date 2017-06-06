@@ -16,5 +16,7 @@ public interface WorkorderDAO {
 
 	List<WorkOrder> getMyWorkorders();
 
+	List<WorkOrder> getMyWorkordersPending();
+
 
 }
