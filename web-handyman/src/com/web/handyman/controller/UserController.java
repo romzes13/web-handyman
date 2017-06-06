@@ -2,6 +2,8 @@ package com.web.handyman.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.handyman.entity.Handyman;
 import com.web.handyman.entity.User;
+import com.web.handyman.entity.WorkOrder;
 import com.web.handyman.service.HandymanService;
 import com.web.handyman.service.UserService;
+import com.web.handyman.service.WorkorderService;
 
 
 
@@ -36,6 +40,9 @@ public class UserController {
 		// injecting handyman service
 		@Autowired
 		private HandymanService handymanService;
+		
+		@Autowired
+		private WorkorderService workorderService;
 		
 
 		
@@ -110,9 +117,13 @@ public class UserController {
 			return "redirect:/user/list";
 		}
 		
-		
+		/** 
+		 * @ TODO
+		 * If authorization failed redirect to 403 or other page.
+		 *   test
+		 */
 		@GetMapping("/mypage")
-		public String userInfo(Model theModel){
+		public String userInfo(HttpSession session, Model theModel){
 		
 			// get user information from service
 			// this can be deleted, it does not belong in the controller
@@ -127,15 +138,24 @@ public class UserController {
 			// get the corresponding handyman object
 			Handyman handyman = handymanService.getHandyman();
 			
+			// getting the list of pending work orders
+			List<WorkOrder> listOfWorkOrders =  workorderService.getMyWorkOrdersPending();
+			
+			System.out.println("Active workorders: " + listOfWorkOrders);
+			
 			// add users to DAO model
 			theModel.addAttribute("user", user);
 			theModel.addAttribute("handyman", handyman);
+			theModel.addAttribute("listOfWorkorders", listOfWorkOrders);
 			
-			
+			session.setAttribute("userLogged", user);
+			session.setAttribute("handymanLogged", handyman);
 			
 			
 			return "user-info";
 			}
+			  
+			
 			return null;
 			  
 		}

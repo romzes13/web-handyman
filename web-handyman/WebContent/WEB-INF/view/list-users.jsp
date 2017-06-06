@@ -40,7 +40,10 @@
 		<a href="/web-handyman">Home</a>
 		<a href="/web-handyman/workorder/list">WorkOrders</a>
 		<a href="/web-handyman/handyman/list">Handyman</a>
+		<a href="/web-handyman/admin">Admin</a>
 		
+		<h4>You logged in as: <c:out value="${pageContext.request.remoteUser}"/></h4>
+
 		
 		<!-- Add our html table -->
 		

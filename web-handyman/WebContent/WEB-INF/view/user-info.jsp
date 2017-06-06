@@ -56,6 +56,9 @@
 		<a href="/web-handyman/admin">Admin</a>
 		
 		<h4>You logged in as: <c:out value="${pageContext.request.remoteUser}"/></h4>
+		<h4> Name from session: ${sessionScope.userLogged.userName}</h4>
+		<h4> Handyman from session: ${sessionScope.handymanLogged.firstName}
+					${sessionScope.handymanLogged.lastName}</h4>
 
 		
 		<!-- Add our html table -->
@@ -146,7 +149,61 @@
 			
 			
 		</table>
+		
+		<br>
+		<h4>Active work orders: </h4>
+		<br>
+		
+		<table>
+			<tr>
+				<th>Work Order Name</th>
+				<th>Description</th>
+				<th>Estimate</th>
+				<th>Location</th>
+				<th>Date received</th>
+				<th>Completed</th>
+				<th>Action</th>
+				
+		
+			</tr>
+			<!-- Loop over and print our customers -->
+			<c:forEach var="listOfWorkorders" items="${listOfWorkorders}">
+					<!-- Construct an update link with workorder id -->
+					
+				 	<c:url var="updateLink" value="/workorder/showFormForUpdate">
+						<c:param name="workorderId" value="${listOfWorkorders.id}"/>
+					</c:url>
+					
+					<!-- Construct delete link with customer id -->
+					<c:url var="deleteLink" value="/workorder/delete">
+						<c:param name="workorderId" value="${listOfWorkorders.id}"/>
+					</c:url> 
+					
+					<tr>
+						<td>${listOfWorkorders.workOrderName}</td>
+						<td>${listOfWorkorders.workDescription}</td>
+						<td>${listOfWorkorders.estimate}</td>
+						<td>${listOfWorkorders.location}</td>
+						<td>${listOfWorkorders.dateReceived}</td>
+						<td>${listOfWorkorders.isCompleated}</td>
+						
+						<td><a href="${updateLink}">Update</a>
+					    | <a href="${deleteLink}"
+					    onclick="if (!(confirm('Are you sure you want to delete this workorder ?'))) return false"
+					    
+					    >Delete</a></td> 
+					</tr>
+			
+			
+			</c:forEach>
+			
+			
+			
+		</table>
 	
+		<br>
+		<br>
+		
 		
 		</div>
 	

@@ -112,12 +112,52 @@ public class WorkorderDAOImpl implements WorkorderDAO {
 			System.out.println("Logged in user is: " + userDetail.getUsername());
 			
 			
+			
 			String tempName = userDetail.getUsername();
 			//create a query
 			/*List<WorkOrder> workorders = currentSession.createQuery("from WorkOrder").getResultList();	*/
 			
 			List<WorkOrder> workorders =  (List<WorkOrder>) currentSession.createQuery("Select w from WorkOrder"
  + " w inner join w.user as u where user_name=:tempName").setParameter("tempName", tempName).getResultList();
+								
+			System.out.println("My workorders: \n" + workorders);
+			
+			for (WorkOrder temp : workorders) {
+				System.out.println(temp);
+			}
+			
+			for(int i=0; i<workorders.size(); i++){
+				
+				
+				System.out.println(workorders.get(i).toString());
+			}
+			
+			return workorders;
+		  }
+		  
+		  
+		return null;
+	}
+	
+	@Override
+	public List<WorkOrder> getMyWorkordersPending() {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		  if (!(auth instanceof AnonymousAuthenticationToken)) {
+			UserDetails userDetail = (UserDetails) auth.getPrincipal();
+			//model.addObject("username", userDetail.getUsername());
+			System.out.println("Logged in user is: " + userDetail.getUsername());
+			
+			
+			
+			String tempName = userDetail.getUsername();
+			//create a query
+			/*List<WorkOrder> workorders = currentSession.createQuery("from WorkOrder").getResultList();	*/
+			
+			List<WorkOrder> workorders =  (List<WorkOrder>) currentSession.createQuery("Select w from WorkOrder"
+ + " w inner join w.user as u where user_name=:tempName and compleated=0").setParameter("tempName", tempName).getResultList();
 								
 			System.out.println("My workorders: \n" + workorders);
 			
