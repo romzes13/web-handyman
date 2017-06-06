@@ -16,4 +16,6 @@ public interface WorkorderService {
 
 	public List<WorkOrder> getMyWorkOrders();
 
+	public List<WorkOrder> getMyWorkOrdersPending();
+
 }
