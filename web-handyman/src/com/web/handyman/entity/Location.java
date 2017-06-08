@@ -36,7 +36,7 @@ public class Location {
 	@Column(name="manager_name")
 	private String managerName;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="customers_id", nullable = true)
 	private Customer customer;
 

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -41,12 +42,12 @@ public class Customer {
 	@Column(name="phone_number")
 	private String phoneNumber;
 	
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.LAZY)
 	@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name="address_id", nullable = true)
 	private Address address;
 	
-	@OneToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name="company_id", nullable = true)
 	private Company company;
@@ -109,13 +110,15 @@ public class Customer {
 	}
 
 
-
-
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", customerName=" + customerName + ", phoneNumber=" + phoneNumber + ", address="
-				+ address + ", company=" + company + ", workOrder=]";
+				+ address + ", company=" + company + "]";
 	}
+
+
+
+	
 	
 	
 	

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -52,7 +53,7 @@ public class Company {
 	@Column(name="info")
 	private String info;
 	
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.LAZY)
 	@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name="address_id", nullable = false)
 	private Address address;
@@ -65,14 +66,25 @@ public class Company {
 	 * 
 	 */
 	
-	/*@OneToMany(fetch = FetchType.LAZY, mappedBy="company" )
+	
+	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name="customer_id", nullable = true)
 	private Set<Customer> customer;
-	*/
-	
 	
 	public Company(){
 		
+	}
+
+
+
+	public Set<Customer> getCustomer() {
+		return customer;
+	}
+
+
+
+	public void setCustomer(Set<Customer> customer) {
+		this.customer = customer;
 	}
 
 
@@ -173,15 +185,17 @@ public class Company {
 
 
 
-
-
-
 	@Override
 	public String toString() {
 		return "Company [id=" + id + ", companyName=" + companyName + ", phoneNumber=" + phoneNumber + ", fax=" + fax
-				+ ", email=" + email + ", website=" + website + ", info=" + info + ", address=" + address
-				+ ", customer=]";
+				+ ", email=" + email + ", website=" + website + ", info=" + info + "]\n";
 	}
+
+
+
+
+
+	
 
 	
 	
