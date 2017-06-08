@@ -115,13 +115,22 @@ public class Address {
 		this.customer = customer;
 	}
 
+	public Handyman getHandyman() {
+		return handyman;
+	}
+
+	public void setHandyman(Handyman handyman) {
+		this.handyman = handyman;
+	}
+
 	@Override
 	public String toString() {
 		return "Address [id=" + id + ", address=" + address + ", addressAlternative=" + addressAlternative + ", city="
-				+ city + ", state=" + state + ", zipCode=" + zipCode + ", company=" + company + ", customer=" + customer
-				+ "]";
+				+ city + ", state=" + state + ", zipCode=" + zipCode +"]";
 	}
 
+	
+	
 	
 	
 	
