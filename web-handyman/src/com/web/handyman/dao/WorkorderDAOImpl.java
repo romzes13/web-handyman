@@ -161,15 +161,18 @@ public class WorkorderDAOImpl implements WorkorderDAO {
 								
 			System.out.println("My workorders: \n" + workorders);
 			
+			// Printing workorders
 			for (WorkOrder temp : workorders) {
 				System.out.println(temp);
 			}
 			
+			// Printing workorders DELETE 
 			for(int i=0; i<workorders.size(); i++){
 				
 				
 				System.out.println(workorders.get(i).toString());
 			}
+			
 			
 			return workorders;
 		  }
