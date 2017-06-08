@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 8, 2017 12:00:36 PM by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="com.web.handyman.entity.Location" table="locations" catalog="web_handymans" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="customers" class="com.web.handyman.entity.Customer" fetch="select">
+            <column name="customers_id" />
+        </many-to-one>
+        <property name="locationName" type="string">
+            <column name="location_name" length="45" />
+        </property>
+        <property name="phoneNumber" type="string">
+            <column name="phone_number" length="45" />
+        </property>
+        <property name="managerName" type="string">
+            <column name="manager_name" length="45" />
+        </property>
+        <set name="workOrders" table="work_order" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="locations_id" />
+            </key>
+            <one-to-many class="com.web.handyman.entity.WorkOrder" />
+        </set>
+    </class>
+</hibernate-mapping>
