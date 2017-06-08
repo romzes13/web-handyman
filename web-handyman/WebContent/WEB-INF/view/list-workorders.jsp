@@ -14,6 +14,10 @@
 	<link type="text/css"
 		  rel="stylesheet"
 		  href="${pageContext.request.contextPath}/resources/css/style.css" />
+		  
+	<link type="text/css"
+		  rel="stylesheet"
+		  href="${pageContext.request.contextPath}/resources/css/w3.css" />
 
 </head>
 
@@ -25,6 +29,15 @@
 		</div>
 	
 	</div>
+	
+	<div class="w3-bar w3-blue">
+  <a href="/web-handyman" class="w3-bar-item w3-button">Home</a>
+  <a href="/web-handyman/workorder/list" class="w3-bar-item w3-button">WorkOrders</a>
+  <a href="/web-handyman/workorder/mylist" class="w3-bar-item w3-button">My workorders</a>
+  <a href="/web-handyman/handyman/list" class="w3-bar-item w3-button">Handymen</a>
+  <a href="/web-handyman/user/mypage" class="w3-bar-item w3-button">User info</a>
+  <a href="/web-handyman/admin" class="w3-bar-item w3-button">Admin</a>
+</div>
 	
 	<div id="container">
 		<div id="content">

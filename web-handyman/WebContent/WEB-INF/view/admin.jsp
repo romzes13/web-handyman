@@ -10,19 +10,35 @@
 	</title>
 	
 	<!-- reference our style sheet -->
+	<!-- reference our style sheet -->
 	
+	<link type="text/css"
+		  rel="stylesheet"
+		  href="${pageContext.request.contextPath}/resources/css/style.css" />
+		  
+	<link type="text/css"
+		  rel="stylesheet"
+		  href="${pageContext.request.contextPath}/resources/css/w3.css" />
 
 </head>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <body>
+
+	<div id="wrapper">
+		<div id="header">
+			<h2>Handyman</h2>
+		</div>
+	</div>
 
 <div class="w3-bar w3-blue">
   <a href="/web-handyman" class="w3-bar-item w3-button">Home</a>
   <a href="/web-handyman/workorder/list" class="w3-bar-item w3-button">WorkOrders</a>
   <a href="/web-handyman/workorder/mylist" class="w3-bar-item w3-button">My workorders</a>
   <a href="/web-handyman/handyman/list" class="w3-bar-item w3-button">Handymen</a>
+  <a href="/web-handyman/user/mypage" class="w3-bar-item w3-button">User info</a>
   <a href="/web-handyman/admin" class="w3-bar-item w3-button">Admin</a>
 </div>
+<br>
 <br>
 
 <h4>Admin's page</h4>
